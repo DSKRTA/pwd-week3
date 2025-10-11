@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 import { FaCheckCircle } from 'react-icons/fa';
-// 1. Import your API client
 import { submissionAPI } from '../services/api';
 
 const FormContainer = styled.div`
@@ -125,16 +124,15 @@ function SubmitRestaurant() {
   const [submitted, setSubmitted] = useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
 
-  // 2. Modified onSubmit to use your API
   const onSubmit = async (data) => {
     try {
-      // Use the createSubmission function from your API service
+
       await submissionAPI.createSubmission(data);
 
       setSubmitted(true);
       toast.success('맛집이 성공적으로 제보되었습니다! 🎉');
       reset();
-      setTimeout(() => setSubmitted(false), 5000);
+
 
     } catch (error) {
       toast.error('제출 중 오류가 발생했습니다.');
@@ -161,9 +159,9 @@ function SubmitRestaurant() {
     <FormContainer>
       <FormTitle>🍽️ 새로운 맛집 제보하기</FormTitle>
 
-      {/* 3. The Netlify-specific form tag is removed */}
+
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* The hidden input for "form-name" has been removed */}
+
 
         <FormGroup>
           <Label htmlFor="restaurantName">맛집 이름 *</Label>
